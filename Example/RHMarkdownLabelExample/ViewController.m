@@ -20,6 +20,7 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"md"];
     NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
     
+    
     [self.markdownLabel setMarkdown:content];
     
     [self.markdownLabel setDidSelectLinkWithURLBlock:^(RHMarkdownLabel *label, NSURL *url) {
