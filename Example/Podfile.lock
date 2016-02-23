@@ -1,0 +1,20 @@
+PODS:
+  - RHMarkdownLabel (0.1):
+    - TTTAttributedLabel
+    - XNGMarkdownParser
+  - TTTAttributedLabel (1.13.4)
+  - XNGMarkdownParser (0.3.2)
+
+DEPENDENCIES:
+  - RHMarkdownLabel (from `../`)
+
+EXTERNAL SOURCES:
+  RHMarkdownLabel:
+    :path: ../
+
+SPEC CHECKSUMS:
+  RHMarkdownLabel: bfafb04b8ad22309486c15992e9a96be24e8402e
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
+  XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
+
+COCOAPODS: 0.39.0

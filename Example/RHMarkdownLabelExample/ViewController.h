@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RHMarkdownLabel.h"
 
 @interface ViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet RHMarkdownLabel *markdownLabel;
 
 @end
-

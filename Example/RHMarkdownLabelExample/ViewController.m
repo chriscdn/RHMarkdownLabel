@@ -9,19 +9,23 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewDidLoad];
+
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"md"];
+    NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    
+    [self.markdownLabel setMarkdown:content];
+    
+    [self.markdownLabel setDidSelectLinkWithURLBlock:^(RHMarkdownLabel *label, NSURL *url) {
+        NSLog(@"URL Selected: @%@", url.absoluteString);
+    }];
+    
 }
 
 @end
