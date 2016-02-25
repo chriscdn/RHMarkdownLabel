@@ -1,4 +1,4 @@
-# `RHMarkdownLabel`
+# RHMarkdownLabel
 
 ## Introduction
 
