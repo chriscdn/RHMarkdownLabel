@@ -2,7 +2,7 @@
 
 ## Header 2
 
-### Header 3
+List:
 
 - item 1
 - item 2
@@ -11,4 +11,4 @@ This is **bold**.
 
 This is *italic*.
 
-How about a [link to GitHub](https://github.com/).
+How about a [link to GitHub](https://github.com/)?
