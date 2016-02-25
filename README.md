@@ -8,7 +8,11 @@
 	[self.myLabel setMarkdown:md];
 
 Most of the logic behind `RHMarkdownLabel` is contained in its two dependencies.  `RHMarkdownLabel` is a subclass of [`TTTAttributedLabel`](https://github.com/TTTAttributedLabel/TTTAttributedLabel) and uses [`XNGMarkdownParser`](https://github.com/xing/XNGMarkdownParser)
-to parse and convert the markdown to an `NSAttributedString `.  `RHMarkdownLabel` is just a glue between these repositories.
+to parse and convert the markdown to an `NSAttributedString `.  `RHMarkdownLabel` is just the glue between these repositories.
+
+## Installation
+
+[CocoaPods](https://cocoapods.org/) makes it easy to install to your project.  
 
 ## Handling Links
 
@@ -22,7 +26,7 @@ Block for other types such as addresses, phone numbers, dates, and transit infor
 	
 ## NSString+markdown.h Category
 
-`RHMarkdownLabel` also contains an `NSString` category for processing markdown.
+`RHMarkdownLabel` also contains an `NSString` category for processing markdown strings.
 	
 ## Contact
 
