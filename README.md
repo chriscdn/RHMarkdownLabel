@@ -12,7 +12,9 @@ to parse and convert the markdown to an `NSAttributedString `.  `RHMarkdownLabel
 
 ## Installation
 
-[CocoaPods](https://cocoapods.org/) makes it easy to install to your project.  
+[CocoaPods](https://cocoapods.org/) makes it easy to install to your project.  Edit your `Podfile` and add:
+
+	pod 'RHMarkdownLabel'
 
 ## Handling Links
 
@@ -22,21 +24,12 @@ to parse and convert the markdown to an `NSAttributedString `.  `RHMarkdownLabel
 		NSLog(@"The user tapped on %@.", url.absoluteString);
 	}];
 	
-Block for other types such as addresses, phone numbers, dates, and transit information is still pending.
+Block for other types such as addresses, phone numbers, dates, and transit information are still pending.
 	
 ## NSString+markdown.h Category
 
 `RHMarkdownLabel` also contains an `NSString` category for processing markdown strings.
 	
-## Contact
-
-Are you using `RHMarkdownLabel` in your project?  I'd love to hear from you!
-
-profile: [Christopher Meyer](https://github.com/chriscdn)  
-e-mail: [chris@schwiiz.org](mailto:chris@schwiiz.org)  
-twitter: [@chriscdn](https://twitter.com/chriscdn)  
-blog: [schwiiz.org](http://schwiiz.org/)
-
 ## License
 
 `RHMarkdownLabel` is available under the MIT license. See the LICENSE file for more information.
