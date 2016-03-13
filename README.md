@@ -12,7 +12,7 @@ to parse and convert the markdown to an `NSAttributedString `.  `RHMarkdownLabel
 
 ## Installation
 
-[CocoaPods](https://cocoapods.org/) makes it easy to install to your project.  Edit your `Podfile` and add:
+[CocoaPods](https://cocoapods.org/) makes it easy to include `RHMarkdownLabel` in your project.  Edit your `Podfile` and add:
 
 	pod 'RHMarkdownLabel'
 
@@ -20,7 +20,7 @@ to parse and convert the markdown to an `NSAttributedString `.  `RHMarkdownLabel
 
 `RHMarkdownLabel` provides a block interface for handling tapped links (instead of using the delegate pattern of `TTTAttributedLabel`).  For example:
 
-	[self.myLabel setDidSelectLinkWithURLBlock:^(`RHMarkdownLabel` *label, NSURL *url) {
+	[self.myLabel setDidSelectLinkWithURLBlock:^(RHMarkdownLabel *label, NSURL *url) {
 		NSLog(@"The user tapped on %@.", url.absoluteString);
 	}];
 	
