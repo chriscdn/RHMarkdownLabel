@@ -24,8 +24,11 @@
 //  THE SOFTWARE.
 //
 
+#import "XNGMarkdownParser.h"
+
 @interface NSString (markdown)
 
++(XNGMarkdownParser *)sharedMarkdownParser;
 -(NSAttributedString *)markdownToAttributedString;
 -(NSString *)markdownToPlainText;
 

@@ -36,7 +36,9 @@
         self.parser = [XNGMarkdownParser new];
         
         _parser.paragraphFont = self.font;
-        _parser.linkFontName = _parser.paragraphFont.fontName;
+        _parser.linkFontName = self.font.fontName;
+        
+        // what about bold, italic, bold-italic?
         
         NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
         

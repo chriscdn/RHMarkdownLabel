@@ -21,18 +21,25 @@
 //
 
 #import "NSString+markdown.h"
-#import "XNGMarkdownParser.h"
 
 @implementation NSString (markdown)
 
++(XNGMarkdownParser *)sharedMarkdownParser {
+    static dispatch_once_t once;
+    static XNGMarkdownParser *sharedInstance;
+    dispatch_once(&once, ^ {
+        sharedInstance = [XNGMarkdownParser new];
+    });
+    
+    return sharedInstance;
+}
+
 -(NSAttributedString *)markdownToAttributedString {
-    XNGMarkdownParser *parser = [XNGMarkdownParser new];
-    return [parser attributedStringFromMarkdownString:self];
+    return [[NSString sharedMarkdownParser] attributedStringFromMarkdownString:self];
 }
 
 -(NSString *)markdownToPlainText {
-    NSAttributedString *attributedString = [self markdownToAttributedString];
-    return [attributedString string];
+    return self.markdownToAttributedString.string;
 }
 
 @end
