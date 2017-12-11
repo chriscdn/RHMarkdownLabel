@@ -26,9 +26,11 @@
 
 #import <UIKit/UIKit.h>
 #import "TTTAttributedLabel.h"
+#import "XNGMarkdownParser.h"
 
 @interface RHMarkdownLabel : TTTAttributedLabel<TTTAttributedLabelDelegate>
 
+@property (nonatomic, strong) XNGMarkdownParser *parser;
 @property (nonatomic, strong) NSString *markdown;
 @property (nonatomic, copy) void (^didSelectLinkWithURLBlock)(RHMarkdownLabel *label, NSURL *url);
 

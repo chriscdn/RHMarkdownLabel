@@ -21,11 +21,6 @@
 //
 
 #import "RHMarkdownLabel.h"
-#import "XNGMarkdownParser.h"
-
-@interface RHMarkdownLabel()
-@property (nonatomic, strong) XNGMarkdownParser *parser;
-@end
 
 @implementation RHMarkdownLabel
 
