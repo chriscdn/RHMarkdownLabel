@@ -2,7 +2,7 @@
 
 ## Introduction
 
-`RHMarkdownLabel` is `UILabel` replacement for supporting markdown.  `RHMarkdownLabel` provides a `-setMarkdown:`method, which transparently converts the markdown string to an `NSAttributedString ` and display it in the label. For example:
+`RHMarkdownLabel` is `UILabel` replacement for supporting markdown.  `RHMarkdownLabel` provides a `-setMarkdown:`method, which transparently converts the markdown string to an `NSAttributedString ` and displays it in the label. For example:
 
 ```ObjectiveC
 	NSString *md = @"This is **bold**.";

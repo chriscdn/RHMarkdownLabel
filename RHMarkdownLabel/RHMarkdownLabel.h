@@ -34,4 +34,8 @@
 @property (nonatomic, strong) NSString *markdown;
 @property (nonatomic, copy) void (^didSelectLinkWithURLBlock)(RHMarkdownLabel *label, NSURL *url);
 
+-(void)addTruncationToken:(NSAttributedString *)token numberOfLines:(NSInteger)numberOfLines;
+-(void)toggleTruncation;
+-(void)expand;
+-(void)collapse;
 @end

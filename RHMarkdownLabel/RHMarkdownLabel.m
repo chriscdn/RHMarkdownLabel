@@ -22,7 +22,30 @@
 
 #import "RHMarkdownLabel.h"
 
+@interface RHMarkdownLabel()
+@property (nonatomic, strong) NSAttributedString *truncationToken;
+@property (nonatomic, assign) NSInteger lines;
+@end
+
 @implementation RHMarkdownLabel
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.delegate = self;
+        self.numberOfLines = 0;
+        self.lines = 0;
+    }
+    return self;
+}
+
+-(instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        self.delegate = self;
+        self.numberOfLines = 0;
+        self.lines = 0;
+    }
+    return self;
+}
 
 -(XNGMarkdownParser *)parser {
     
@@ -40,34 +63,32 @@
         paragraphStyle.minimumLineHeight = self.minimumLineHeight;
         paragraphStyle.maximumLineHeight = self.maximumLineHeight;
         
-        _parser.topAttributes = @{
-                                  NSParagraphStyleAttributeName: paragraphStyle,
-                                  NSForegroundColorAttributeName: self.textColor
-                                  };
+        //        _parser.topAttributes = @{
+        //                                  NSParagraphStyleAttributeName: paragraphStyle,
+        //                                  NSForegroundColorAttributeName: self.textColor
+        //                                  };
+        
+        if (@available(iOS 13.0, *)) {
+            _parser.topAttributes = @{
+                NSParagraphStyleAttributeName: paragraphStyle,
+                NSForegroundColorAttributeName: [UIColor labelColor]
+            };
+        } else {
+            _parser.topAttributes = @{
+                NSParagraphStyleAttributeName: paragraphStyle,
+                NSForegroundColorAttributeName: [UIColor darkTextColor]
+            };
+        }
     }
     
     return _parser;
 }
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        self.delegate = self;
-        self.numberOfLines = 0;
-    }
-    return self;
-}
-
--(instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        self.delegate = self;
-        self.numberOfLines = 0;
-    }
-    return self;
-}
-
 -(void)setMarkdown:(NSString *)markdown {
     _markdown = markdown;
     self.text = [self.parser attributedStringFromMarkdownString:markdown];
+    
+    [self toggleNothing];
 }
 
 -(void)setDidSelectLinkWithURLBlock:(void (^)(RHMarkdownLabel *label, NSURL *url))didSelectLinkWithURLBlock {
@@ -75,10 +96,85 @@
     self.enabledTextCheckingTypes = NSTextCheckingTypeLink;
 }
 
-
 -(void)attributedLabel:(RHMarkdownLabel *)label didSelectLinkWithURL:(NSURL *)url {
     if (self.didSelectLinkWithURLBlock) {
         self.didSelectLinkWithURLBlock(label, url);
+    }
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    
+    if ([self linkAtPoint:[touch locationInView:self]]) {
+        // we have a link.. look at super for implementation
+        [super touchesBegan:touches withEvent:event];
+    } else if (self.lines == 0) {
+        [super touchesBegan:touches withEvent:event];
+    } else {
+        [self toggleTruncation];
+    }
+}
+
+-(void)addTruncationToken:(NSAttributedString *)token numberOfLines:(NSInteger)numberOfLines {
+    
+    [self setTruncationToken:token];
+    [self setLines:numberOfLines];
+    
+    [self setNumberOfLines:0];
+    [self toggleTruncation];
+}
+
+-(NSAttributedString *)truncationToken {
+    if (_truncationToken == nil) {
+        NSMutableAttributedString *token = [[NSMutableAttributedString alloc] initWithString:@"\u2026"];
+        if (@available(iOS 13.0, *)) {
+            [token appendAttributedString:[[NSAttributedString alloc]
+                                           initWithString:NSLocalizedString(@"more", nil) attributes:@{NSForegroundColorAttributeName:[UIColor secondaryLabelColor]}]];
+        } else {
+            [token appendAttributedString:[[NSAttributedString alloc]
+                                           initWithString:NSLocalizedString(@"more", nil) attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]}]];
+        }
+        
+        self.truncationToken = token;
+    }
+    
+    return _truncationToken;
+}
+
+-(void)expand {
+    //    if (self.numberOfLines > 0) {
+    [self setNumberOfLines:0];
+    [self setAttributedTruncationToken:nil];
+    //    }
+}
+
+-(void)collapse {
+    //    if (self.numberOfLines == 0) {
+    [self setNumberOfLines:self.lines];
+    //        [self setAttributedTruncationToken:self.truncationToken];
+    
+    if (self.markdown.length) {
+        [self setAttributedTruncationToken:self.truncationToken];
+    } else {
+        // No text? Unset the truncationToken.
+        [self setAttributedTruncationToken:nil];
+    }
+    //    }
+}
+
+-(void)toggleTruncation {
+    if (self.numberOfLines == 0) {
+        [self collapse];
+    } else {
+        [self expand];
+    }
+}
+
+-(void)toggleNothing {
+    if (self.numberOfLines == 0) {
+        [self expand];
+    } else {
+        [self collapse];
     }
 }
 
